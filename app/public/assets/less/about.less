@@ -1,0 +1,29 @@
+.section-about {
+	background-color: #ccc;	
+}
+.media-about {
+	img {
+		max-width: 150px;
+		border: 3px solid @primary-color;
+	}
+	.title {
+		color: @primary-color;
+		margin-bottom: 5px;
+		font-weight: 700;
+	}
+}
+
+// media queries
+@media only screen and (max-width : 992px) {
+	.media-about {
+		margin-bottom: 30px;
+	}
+}
+@media only screen and (max-width : 480px) {
+	.media-about {
+		img {
+			max-width: 80px;
+			border: 3px solid @primary-color;
+		}
+	}
+}

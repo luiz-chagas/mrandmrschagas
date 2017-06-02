@@ -1,0 +1,31 @@
+.section-gallery {
+	position: relative;
+	.photo {
+		border: 1px solid #efefef;
+		padding: 10px 10px 30px;
+		background-color: #ffffff;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		display: inline-block;
+		-webkit-transition: all 200ms ease-out;
+    -moz-transition: all 200ms ease-out;
+    -o-transition: all 200ms ease-out;
+    transition: all 200ms ease-out;
+		&:hover {
+			-webkit-transform: rotate(3deg);
+      transform: rotate(3deg);
+		}
+	}
+}
+
+/* Gallery plugin changes */
+.blueimp-gallery > .close {
+	color: #ffafaf !important;
+}
+.blueimp-gallery > .prev:hover, .blueimp-gallery > .next:hover {
+	color: #ffafaf !important;
+}
+.blueimp-gallery > .prev, .blueimp-gallery > .next {
+	border-color: #ffafaf !important;
+	color: #ffafaf !important;
+}

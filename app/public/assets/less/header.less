@@ -1,0 +1,76 @@
+header {
+	margin-top: 40px;
+	position: relative;
+	background-size: cover;
+	background-color: #7d6060;
+	background-position: center;
+	.title {
+		font-weight: 500;
+		font-size: 24px;
+	}
+	.brand {
+		h1 {
+			color: #ffffff;
+			display: inline-block;
+			border-top: 1px solid #ffffff;
+			border-bottom: 1px solid #ffffff;
+			padding: 10px 15px;
+			font-size: 76px;
+			text-shadow: 2px 2px 0px @primary-color;
+		}
+	}
+}
+.intro-content {
+	position: relative;
+	z-index: 99;
+	margin-top: 130px;
+	margin-bottom: 130px;
+	color: #ffffff;
+	.location {
+		text-transform: uppercase;
+		font-weight: 500;
+		font-size: 18px;
+		margin-top: 15px;
+		margin-bottom: 5px;
+	}
+	.heart {
+		color: #fb5c6c;
+		display: inline-block;
+		margin-left: 40px;
+		margin-right: 40px;
+		font-size: 36px;
+		.fa-heart {
+			animation: beat .25s infinite alternate;
+			transform-origin: center;
+		}
+	}
+}
+/* Heart beat animation */
+@keyframes beat{
+	to { transform: scale(1.4); }
+}
+/* media queries */
+@media only screen and (max-width : 480px) {
+	header {
+		.title {
+			font-size: 16px;
+			margin-bottom: 10px;
+		}
+		.brand {
+			h1 {
+				font-size: 56px;
+				margin-top: 10px;
+			}
+		}
+	}
+	.intro-content {
+		margin-top: 90px;
+		margin-bottom: 90px;
+		.heart { 
+			font-size: 28px;
+		}
+		.location {
+			font-size: 14px;
+		}
+	}
+}

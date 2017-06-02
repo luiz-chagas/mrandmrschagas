@@ -1,0 +1,31 @@
+form.form {
+	margin-top: 30px;
+	margin-bottom: 15px;
+}
+.form-control {
+	border-radius: 0px;
+	border-width: 2px;
+	height: 44px;
+	font-size: 16px;
+	font-weight: 300;
+	font-family: @sans-serif-font;
+}
+.form-control:focus {
+  border-color: @primary-color;
+  outline: none;
+  box-shadow: none;
+  background: #fff;
+}
+textarea.form-control {
+	height: 160px;
+}
+label.error {
+	color: #f72510;
+	font-weight: 300;
+	font-size: 12px;
+}
+input[type="text"].error,
+input[type="email"].error, 
+textarea.error {
+	border-color: #f72510 !important;
+}
