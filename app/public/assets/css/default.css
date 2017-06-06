@@ -240,9 +240,10 @@ header .brand h1 {
 .intro-content {
   position: relative;
   z-index: 99;
-  margin-top: 130px;
-  margin-bottom: 130px;
+  margin-top: 100px;
+  margin-bottom: 100px;
   color: #ffffff;
+  height: calc(100vh - 310px);
 }
 .intro-content .location {
   text-transform: uppercase;
@@ -275,15 +276,18 @@ header .brand h1 {
     margin-bottom: 10px;
   }
   header .brand h1 {
-    font-size: 56px;
+    font-size: 15vw;
     margin-top: 10px;
+    padding: 10px 5px;
   }
   .intro-content {
     margin-top: 90px;
     margin-bottom: 90px;
   }
   .intro-content .heart {
-    font-size: 28px;
+    font-size: 7vw;
+    margin-left: 10px;
+    margin-right: 10px;
   }
   .intro-content .location {
     font-size: 14px;
@@ -475,4 +479,18 @@ textarea.error {
 }
 .footer a {
   color: #dd659f;
+}
+
+.pic{
+  height: 320px;
+}
+
+.pic a {
+  height: 300px;
+  margin: 0 auto;
+}
+
+.pic a img {
+  height: 250px;
+  margin: 0 auto;
 }
