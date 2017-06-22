@@ -501,7 +501,7 @@ textarea.error {
   display: block;
   position: relative;
 	height: auto;
-	background-color: lightpink;
+	background-color: lightyellow;
   padding: 15px;
 }
 
@@ -510,7 +510,7 @@ textarea.error {
 }
 
 .btm-left-in {
-  background-color: lightblue;
+  background-color: lightyellow;
 }
 
 .tri-right.btm-right-in:after{
@@ -522,7 +522,7 @@ textarea.error {
 	right: 38px;
 	bottom: -20px;
 	border: 12px solid;
-	border-color: lightpink lightpink transparent transparent;
+	border-color: lightyellow lightyellow transparent transparent;
 }
 
 .tri-right.border.btm-right-in:before {
@@ -564,7 +564,7 @@ textarea.error {
   top: auto;
 	bottom: -20px;
 	border: 12px solid;
-	border-color: lightblue transparent transparent lightblue;
+	border-color: lightyellow transparent transparent lightyellow;
 }
 
 .and {
