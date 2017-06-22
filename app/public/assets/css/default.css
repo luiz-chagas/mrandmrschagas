@@ -578,6 +578,17 @@ textarea.error {
   max-width: 50vw;
 }
 
+.luiz::after{
+  content: "Luiz";
+  display: block;
+}
+
+.callie::after{
+  content: "Callie";
+  display: block;
+  text-align: right;
+}
+
 @media only screen and (max-width: 992px) {
   .talk-bubble{
     max-width: 50vw;
