@@ -501,7 +501,7 @@ textarea.error {
   display: block;
   position: relative;
 	height: auto;
-	background-color: lightyellow;
+	background-color: lightpink;
   padding: 15px;
 }
 
@@ -522,7 +522,7 @@ textarea.error {
 	right: 38px;
 	bottom: -20px;
 	border: 12px solid;
-	border-color: lightyellow lightyellow transparent transparent;
+	border-color: lightpink lightpink transparent transparent;
 }
 
 .tri-right.border.btm-right-in:before {
