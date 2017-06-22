@@ -395,7 +395,7 @@ header .brand h1 {
   }
 }
 .section-story p {
-  font-style: italic;
+  /*font-style: italic;*/
   font-size: 18px;
 }
 .section-gallery {
@@ -493,4 +493,105 @@ textarea.error {
 .pic a img {
   height: 250px;
   margin: 0 auto;
+}
+
+.talk-bubble {
+	margin: 20px auto;
+  margin-bottom: 50px;
+  display: block;
+  position: relative;
+	height: auto;
+	background-color: lightyellow;
+  padding: 15px;
+}
+
+.border{
+  border: 8px solid #666;
+}
+
+.btm-left-in {
+  background-color: lightblue;
+}
+
+.tri-right.btm-right-in:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: auto;
+	right: 38px;
+	bottom: -20px;
+	border: 12px solid;
+	border-color: lightyellow lightyellow transparent transparent;
+}
+
+.tri-right.border.btm-right-in:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: auto;
+	right: 30px;
+	bottom: -40px;
+	border: 20px solid;
+	border-color: #666 #666 transparent transparent;
+}
+
+.talktext p{
+  line-height: 1.5em;
+}
+
+.tri-right.border.btm-left-in:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 30px;
+  right: auto;
+  top: auto;
+	bottom: -40px;
+	border: 20px solid;
+	border-color: #666 transparent transparent #666;
+}
+
+.tri-right.btm-left-in:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 38px;
+  right: auto;
+  top: auto;
+	bottom: -20px;
+	border: 12px solid;
+	border-color: lightblue transparent transparent lightblue;
+}
+
+.and {
+  font-size: 60px;
+  color: white;
+  text-shadow: 2px 2px 0px #8a1f53;
+}
+
+
+.talk-bubble{
+  max-width: 50vw;
+}
+
+@media only screen and (max-width: 992px) {
+  .talk-bubble{
+    max-width: 50vw;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .talk-bubble{
+    max-width: 70vw;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .talk-bubble{
+    max-width: 80vw;
+  }
 }
