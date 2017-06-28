@@ -631,3 +631,7 @@ textarea.error {
     transform: rotateY(360deg);
   }
 }
+
+#game canvas {
+  margin: 0 auto;
+}
