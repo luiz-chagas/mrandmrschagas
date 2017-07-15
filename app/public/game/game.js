@@ -101,32 +101,28 @@ var gameState = {
   downPressed: false,
   onLog: true,
   score: 0,
-  carSpeed: 120,
-  logSpeed: 110,
+  carSpeed: 80,
+  logSpeed: 70,
   bunnyHop: function () {
     if (this.keys.left.isDown && !this.leftPressed) {
       this.leftPressed = true;
-      this.player.x -= this.tileSize;
+      this.player.x -= this.tileSize/2;
       this.player.frame = 1;
-      //this.player.angle = -90;
     }
     if (this.keys.right.isDown && !this.rightPressed) {
       this.rightPressed = true;
-      this.player.x += this.tileSize;
+      this.player.x += this.tileSize/2;
       this.player.frame = 3;
-      //this.player.angle = 90;
     }
     if (this.keys.up.isDown && !this.upPressed) {
       this.upPressed = true;
       this.player.y -= this.tileSize;
       this.player.frame = 4;
-      //this.player.angle = 0;
     }
     if (this.keys.down.isDown && !this.downPressed) {
       this.downPressed = true;
       this.player.y += this.tileSize;
       this.player.frame = 2;
-      //this.player.angle = 180;
     }
     if (!this.keys.left.isDown) {
       this.leftPressed = false;
@@ -147,24 +143,24 @@ var gameState = {
       this.player.y = this.tileSize + 5;
       this.player.x = game.width / 2 - 8;
       this.player.frame = 2;
+      this.player.body.velocity.x = 0;
       if (this.score === 0) this.score++;
     }
   },
   checkBunny: function () {
-    // if (this.player.y < 2 * this.tileSize + this.tileSize / 2) {
-    //   var index = this.baskets.indexOf(this.player.x - this.tileSize / 2)
-    //   if (index != -1) {
-    //     this.baskets[index] = false;
-    //     var newBunny = game.add.sprite(this.player.x, this.player.y, 'luiz', 2);
-    //     newBunny.scaleTo(0.5, 0.5);
-    //     newBunny.anchor.setTo(0.5);
-    //     //newBunny.angle = 180;
-    //     this.score++;
-    //     this.resetBunny();
-    //   }
-    // }
     if (this.player.y > this.rows[2] && this.player.y < this.rows[8] && !this.onLog) {
       this.bunnyDie();
+    }
+    if (!this.onLog || this.player.y > this.rows[8]) {
+      this.player.body.velocity.x = 0;
+    } else if ((this.player.y > this.rows[2] && this.player.y < this.rows[3] ||
+        this.player.y > this.rows[4] && this.player.y < this.rows[5] ||
+        this.player.y > this.rows[6] && this.player.y < this.rows[7]) && this.onLog) {
+      this.player.body.velocity.x = this.logSpeed;
+    } else if ((this.player.y > this.rows[3] && this.player.y < this.rows[4] ||
+        this.player.y > this.rows[5] && this.player.y < this.rows[6] ||
+        this.player.y > this.rows[7] && this.player.y < this.rows[8]) && this.onLog) {
+      this.player.body.velocity.x = -this.logSpeed;
     }
   },
   checkIfOnLog: function () {
@@ -314,7 +310,6 @@ var gameState = {
     this.setUpLogs();
     game.add.tileSprite(0, this.rows[8], 384, 32, 'logFix');
     this.player = game.add.sprite(5 * 32 + this.tileSize / 2, this.rows[this.rows.length - 1] + this.tileSize / 2, 'luiz', 4);
-    //this.player = game.add.sprite(0 + this.tileSize / 2, this.rows[0] + this.tileSize / 2, 'luiz', 4);
     this.player.scale.set(0.5);
     this.player.anchor.setTo(0.5);
     this.setUpCars();
@@ -324,7 +319,7 @@ var gameState = {
     this.callie = game.add.sprite(game.width / 2, this.tileSize / 2, 'callie', 1);
     this.callie.scale.set(0.6);
     this.church = game.add.image(game.width - 70, this.tileSize - 55, 'church');
-    this.church.scale.setTo(0.1,0.07);
+    this.church.scale.setTo(0.1, 0.07);
     this.church.anchor.set(0.5);
   },
   update: function () {
@@ -339,8 +334,6 @@ var gameState = {
     game.physics.arcade.overlap(this.player, this.cars, this.bunnyDie, null, this);
     if (this.score === 1) {
       this.score++;
-      //this.resetBunny();
-      //this.player.kill();
       style = {
         font: '25px Arial',
         fill: '#ffffff'
@@ -352,10 +345,7 @@ var gameState = {
         y: 290
       }, 1000).easing(Phaser.Easing.Bounce.Out);
       gratsTween.start();
-      // gratsTween.onComplete.add(function () {
-      //   game.state.start('menu');
-      // }, false)
-      gratsTween.onComplete.add(function(){
+      gratsTween.onComplete.add(function () {
         var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         spaceKey.onDown.addOnce(() => {
           game.state.start('menu');
