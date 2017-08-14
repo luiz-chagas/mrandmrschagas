@@ -501,8 +501,9 @@ textarea.error {
   display: block;
   position: relative;
 	height: auto;
-	background-color: lightyellow;
+	background-color: transparent;
   padding: 15px;
+  border-radius: 20px;
 }
 
 .border{
@@ -510,7 +511,7 @@ textarea.error {
 }
 
 .btm-left-in {
-  background-color: lightyellow;
+  background-color: transparent;
 }
 
 .tri-right.btm-right-in:after{
@@ -522,7 +523,7 @@ textarea.error {
 	right: 38px;
 	bottom: -20px;
 	border: 12px solid;
-	border-color: lightyellow lightyellow transparent transparent;
+	border-color: transparent transparent transparent transparent;
 }
 
 .tri-right.border.btm-right-in:before {
@@ -564,7 +565,7 @@ textarea.error {
   top: auto;
 	bottom: -20px;
 	border: 12px solid;
-	border-color: lightyellow transparent transparent lightyellow;
+	border-color: transparent transparent transparent transparent;
 }
 
 .and {
@@ -634,4 +635,8 @@ textarea.error {
 
 #game canvas {
   margin: 0 auto;
+}
+
+.container-parallax {
+  height: 30vh;
 }
