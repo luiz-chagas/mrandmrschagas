@@ -21,6 +21,7 @@ var loadState = {
     game.load.spritesheet('callie', 'GFX/callie_35_59.png', 35, 59, 1);
     game.load.image('wedding', 'GFX/wedding.png');
     game.load.image('church', 'GFX/church.png');
+    game.load.spritesheet('buttonhorizontal', 'GFX/button-horizontal.png', 96, 64);
   },
   create: function () {
     game.state.start('menu');
@@ -38,6 +39,7 @@ var menuState = {
       fill: '#ffffff',
       boundsAlignH: "center"
     };
+
     this.welcomeText = game.add.text(game.width / 2, -50, 'LUIZ & CALLIE IN', style);
     this.welcomeText.anchor.set(0.5);
 
@@ -51,8 +53,12 @@ var menuState = {
     this.weddingImage.scale.set(0.2);
     this.weddingImage.alpha = 0;
 
+    if (game.device.desktop) {
+      this.pressText = game.add.text(game.width / 2, game.height / 2 + 150, 'PRESS SPACE TO START', style);
+    } else {
+      this.pressText = game.add.text(game.width / 2, game.height / 2 + 150, 'TAP SCREEN TO START', style);
+    }
     style.font = '12px Monospace';
-    this.pressText = game.add.text(game.width / 2, game.height / 2 + 150, 'PRESS SPACE TO START', style);
     this.pressText.alpha = 0;
     this.pressText.anchor.set(0.5);
 
@@ -85,6 +91,10 @@ var menuState = {
 
     var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     spaceKey.onDown.addOnce(this.startGame, this);
+
+    game.input.onTap.addOnce(() => {
+      this.startGame();
+    }, this);
   },
   startGame: function () {
     game.state.start('game');
@@ -104,36 +114,36 @@ var gameState = {
   carSpeed: 80,
   logSpeed: 70,
   bunnyHop: function () {
-    if (this.keys.left.isDown && !this.leftPressed) {
+    if ((this.keys.left.isDown || this.mobileLeft) && !this.leftPressed) {
       this.leftPressed = true;
-      this.player.x -= this.tileSize/2;
+      this.player.x -= this.tileSize / 2;
       this.player.frame = 1;
     }
-    if (this.keys.right.isDown && !this.rightPressed) {
+    if ((this.keys.right.isDown || this.mobileRight) && !this.rightPressed) {
       this.rightPressed = true;
-      this.player.x += this.tileSize/2;
+      this.player.x += this.tileSize / 2;
       this.player.frame = 3;
     }
-    if (this.keys.up.isDown && !this.upPressed) {
+    if ((this.keys.up.isDown || this.mobileUp) && !this.upPressed) {
       this.upPressed = true;
       this.player.y -= this.tileSize;
       this.player.frame = 4;
     }
-    if (this.keys.down.isDown && !this.downPressed) {
+    if ((this.keys.down.isDown || this.mobileDown) && !this.downPressed) {
       this.downPressed = true;
       this.player.y += this.tileSize;
       this.player.frame = 2;
     }
-    if (!this.keys.left.isDown) {
+    if (!this.keys.left.isDown && !this.mobileLeft) {
       this.leftPressed = false;
     }
-    if (!this.keys.right.isDown) {
-      this.rightPressed = false;;
+    if (!this.keys.right.isDown && !this.mobileRight) {
+      this.rightPressed = false;
     }
-    if (!this.keys.up.isDown) {
+    if (!this.keys.up.isDown && !this.mobileUp) {
       this.upPressed = false;
     }
-    if (!this.keys.down.isDown) {
+    if (!this.keys.down.isDown && !this.mobileDown) {
       this.downPressed = false;
     }
   },
@@ -292,6 +302,9 @@ var gameState = {
     ohNoTween.chain(dieTextTween);
 
     dieTextTween.onComplete.add(function () {
+      game.input.onTap.addOnce(() => {
+        game.state.start('game');
+      }, this);
       var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
       spaceKey.onDown.addOnce(() => {
         game.state.start('game');
@@ -321,6 +334,49 @@ var gameState = {
     this.church = game.add.image(game.width - 70, this.tileSize - 55, 'church');
     this.church.scale.setTo(0.1, 0.07);
     this.church.anchor.set(0.5);
+    //Mobile
+    if (!game.device.desktop) {
+      //Left
+      let buttonleft = game.add.button(40, 290, 'buttonhorizontal', null, this, 0, 1, 0, 1);
+      buttonleft.scale.set(0.5);
+      buttonleft.anchor.set(0.5);
+      buttonleft.events.onInputDown.add(() => {
+        this.mobileLeft = true;
+      });
+      buttonleft.events.onInputUp.add(() => {
+        this.mobileLeft = false;
+      });
+      //Right
+      let buttonright = game.add.button(90, 290, 'buttonhorizontal', null, this, 0, 1, 0, 1);
+      buttonright.scale.set(0.5);
+      buttonright.anchor.set(0.5);
+      buttonright.events.onInputDown.add(() => {
+        this.mobileRight = true;
+      });
+      buttonright.events.onInputUp.add(() => {
+        this.mobileRight = false;
+      });
+      //Up
+      let buttonup = game.add.button(330, 270, 'buttonhorizontal', null, this, 0, 1, 0, 1);
+      buttonup.scale.set(0.5);
+      buttonup.anchor.set(0.5);
+      buttonup.events.onInputDown.add(() => {
+        this.mobileUp = true;
+      });
+      buttonup.events.onInputUp.add(() => {
+        this.mobileUp = false;
+      });
+      //Down
+      let buttondown = game.add.button(330, 310, 'buttonhorizontal', null, this, 0, 1, 0, 1);
+      buttondown.scale.set(0.5);
+      buttondown.anchor.set(0.5);
+      buttondown.events.onInputDown.add(() => {
+        this.mobileDown = true;
+      });
+      buttondown.events.onInputUp.add(() => {
+        this.mobileDown = false;
+      });
+    }
   },
   update: function () {
     if (this.score === 0) {
@@ -346,6 +402,9 @@ var gameState = {
       }, 1000).easing(Phaser.Easing.Bounce.Out);
       gratsTween.start();
       gratsTween.onComplete.add(function () {
+        game.input.onTap.addOnce(() => {
+          game.state.start('menu');
+        }, this);
         var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         spaceKey.onDown.addOnce(() => {
           game.state.start('menu');
