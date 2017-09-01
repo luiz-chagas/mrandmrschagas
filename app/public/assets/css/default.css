@@ -633,6 +633,11 @@ textarea.error {
   }
 }
 
+#game {
+  height: 100vh;
+  position: relative;
+}
+
 #game canvas {
   margin: 0 auto;
 }

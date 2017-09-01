@@ -337,7 +337,7 @@ var gameState = {
     //Mobile
     if (!game.device.desktop) {
       //Left
-      let buttonleft = game.add.button(40, 290, 'buttonhorizontal', null, this, 0, 1, 0, 1);
+      let buttonleft = game.add.button(40, game.world.centerY + 15, 'buttonhorizontal', null, this, 0, 1, 0, 1);
       buttonleft.scale.set(0.5);
       buttonleft.anchor.set(0.5);
       buttonleft.events.onInputDown.add(() => {
@@ -347,7 +347,7 @@ var gameState = {
         this.mobileLeft = false;
       });
       //Right
-      let buttonright = game.add.button(90, 290, 'buttonhorizontal', null, this, 0, 1, 0, 1);
+      let buttonright = game.add.button(90, game.world.centerY + 15, 'buttonhorizontal', null, this, 0, 1, 0, 1);
       buttonright.scale.set(0.5);
       buttonright.anchor.set(0.5);
       buttonright.events.onInputDown.add(() => {
@@ -357,7 +357,7 @@ var gameState = {
         this.mobileRight = false;
       });
       //Up
-      let buttonup = game.add.button(330, 270, 'buttonhorizontal', null, this, 0, 1, 0, 1);
+      let buttonup = game.add.button(game.world.width - 50, game.world.centerY, 'buttonhorizontal', null, this, 0, 1, 0, 1);
       buttonup.scale.set(0.5);
       buttonup.anchor.set(0.5);
       buttonup.events.onInputDown.add(() => {
@@ -367,7 +367,7 @@ var gameState = {
         this.mobileUp = false;
       });
       //Down
-      let buttondown = game.add.button(330, 310, 'buttonhorizontal', null, this, 0, 1, 0, 1);
+      let buttondown = game.add.button(game.world.width - 50, game.world.centerY + 35, 'buttonhorizontal', null, this, 0, 1, 0, 1);
       buttondown.scale.set(0.5);
       buttondown.anchor.set(0.5);
       buttondown.events.onInputDown.add(() => {
