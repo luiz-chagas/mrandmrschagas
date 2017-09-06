@@ -3,10 +3,10 @@ $(window).load(function() {
   $(".se-pre-con").fadeOut("slow");;
 });
 $(document).ready(function(){
-  // $('body').scrollspy({
-  //   target: '.navbar-fixed-top',
-  //   offset: 40
-  // })
+  $('body').scrollspy({
+    target: '.navbar-fixed-top',
+    offset: 40
+  })
   $('a.scrollto').bind('click', function(event) {
       var $anchor = $(this);
       $('html, body').stop().animate({
@@ -33,9 +33,9 @@ $(document).ready(function(){
 
 
 // wow
-// new WOW({
-//     offset: 50
-// }).init();
+new WOW({
+    offset: 50
+}).init();
 
 // Back to Top
 // if ($('#back-to-top').length) {
