@@ -714,7 +714,6 @@ input[type="text"].error, input[type="email"].error, textarea.error {
 }
 
 #game {
-  height: 100vh;
   position: relative;
 }
 
