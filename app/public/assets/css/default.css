@@ -732,3 +732,9 @@ input[type="text"].error, input[type="email"].error, textarea.error {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+@media only screen and (max-width: 1024px) {
+    .parallax {
+        background-attachment: scroll;
+    }
+}
