@@ -735,8 +735,22 @@ input[type="text"].error, input[type="email"].error, textarea.error {
   background-size: cover;
 }
 
-@media only screen and (max-width: 1024px) {
+.game-alert {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
     .parallax {
-        background-attachment: scroll;
+        background-attachment: fixed;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .game-alert {
+      display: block;
+    }
+
+    #game {
+      display: none;
     }
 }
