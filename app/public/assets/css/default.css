@@ -276,6 +276,9 @@ header .brand h1 {
   margin-bottom: 100px;
   color: #ffffff;
   height: calc(100vh - 310px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .intro-content .location {
