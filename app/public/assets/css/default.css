@@ -741,7 +741,7 @@ input[type="text"].error, input[type="email"].error, textarea.error {
 
 @media screen and (max-width: 1024px) {
     .parallax {
-        background-attachment: fixed;
+        background-attachment: scroll;
     }
 }
 
