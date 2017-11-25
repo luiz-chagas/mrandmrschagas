@@ -71,13 +71,38 @@ function startRSVP() {
         }
 
         return swal({
-          title: `How many people are coming?`,
-          input: 'number',
-          inputValue: 0,
-          confirmButtonText: 'Next',
+          title: `Are you coming?`,
+          confirmButtonText: 'Yes!',
           showLoaderOnConfirm: true,
-          allowOutsideClick: false
+          allowOutsideClick: false,
+          showCancelButton: true,
+          cancelButtonText: `I can't come.`,
         }).then(result => {
+
+          if (result.dismiss == "cancel") {
+            swal({
+              title: 'Bummer!',
+              html: `Thanks for letting us know!`
+            });
+            throw "End of flow";
+          }
+
+          if (user.tickets > 1) {
+            return swal({
+              title: `How many people are coming?`,
+              input: 'number',
+              inputValue: 1,
+              confirmButtonText: 'Next',
+              showLoaderOnConfirm: true,
+              allowOutsideClick: false
+            });
+          } else {
+            return Promise.resolve({
+              value: 1
+            });
+          }
+        }).then(result => {
+
           if (!result) {
             return;
           }
@@ -120,6 +145,8 @@ function startRSVP() {
               html: `Thanks for letting us know!`
             });
           }
+        }).catch(err => {
+
         });
       });
     } else {
