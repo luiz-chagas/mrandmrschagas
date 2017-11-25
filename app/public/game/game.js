@@ -53,11 +53,8 @@ var menuState = {
     this.weddingImage.scale.set(0.2);
     this.weddingImage.alpha = 0;
 
-    if (game.device.desktop) {
-      this.pressText = game.add.text(game.width / 2, game.height / 2 + 150, 'PRESS SPACE TO START', style);
-    } else {
-      this.pressText = game.add.text(game.width / 2, game.height / 2 + 150, 'TAP SCREEN TO START', style);
-    }
+    this.pressText = game.add.text(game.width / 2, game.height / 2 + 150, 'CLICK TO START', style);
+
     style.font = '12px Monospace';
     this.pressText.alpha = 0;
     this.pressText.anchor.set(0.5);
@@ -88,10 +85,6 @@ var menuState = {
     welcomeTween.chain(titleTween, imageTween, pressTween);
 
     //Events
-
-    var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    spaceKey.onDown.addOnce(this.startGame, this);
-
     game.input.onTap.addOnce(() => {
       this.startGame();
     }, this);
@@ -303,10 +296,6 @@ var gameState = {
 
     dieTextTween.onComplete.add(function () {
       game.input.onTap.addOnce(() => {
-        game.state.start('game');
-      }, this);
-      var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-      spaceKey.onDown.addOnce(() => {
         game.state.start('game');
       }, this);
     }, this);
