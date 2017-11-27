@@ -80,10 +80,21 @@ function startRSVP() {
         }).then(result => {
 
           if (result.dismiss == "cancel") {
+            $.ajax({
+              type: "POST",
+              url: '/api/confirm',
+              data: {
+                person: user.name,
+                amount: 0
+              },
+              dataType: 'JSON'
+            });
+
             swal({
               title: 'Bummer!',
               html: `Thanks for letting us know!`
             });
+            
             throw "End of flow";
           }
 
@@ -122,7 +133,7 @@ function startRSVP() {
                 url: '/api/confirm',
                 data: {
                   person: user.name,
-                  amount: user.tickets
+                  amount: result.value
                 },
                 dataType: 'JSON'
               }).then(function(data, textStatus, jqXHR) {

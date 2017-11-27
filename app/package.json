@@ -12,6 +12,9 @@
     "express": "~4.14.1",
     "hbs": "~4.0.1",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.2"
+    "nodemailer": "^4.4.0",
+    "serve-favicon": "~2.3.2",
+    "textbelt": "0.0.3",
+    "twilio": "^3.10.0"
   }
 }
