@@ -33,141 +33,147 @@ $(document).ready(function() {
 
 function startRSVP() {
   swal({
-    title: `What's your name?`,
-    input: 'text',
-    showCancelButton: true,
-    confirmButtonText: 'Next',
-    showLoaderOnConfirm: true,
-    allowOutsideClick: false,
-    inputValidator: (value) => {
-      return !value && 'You need to write something!'
-    }
-  }).then((result) => {
-    if (!result || !result.value) {
-      return;
-    }
-
-    const user = findRSVP(result.value);
-
-    if (user.tickets > 0) {
-      swal({
-        type: 'success',
-        title: 'Yay!',
-        html: `I've found your reservation ${user.name}! <br> You have up to ${user.tickets} tickets.`,
-        confirmButtonText: 'Next',
-        showCancelButton: true,
-        cancelButtonText: `That's not me`,
-        showLoaderOnConfirm: true,
-        allowOutsideClick: false
-      }).then((result) => {
-
-        if (result.dismiss == "cancel") {
-          return swal({
-            type: 'error',
-            title: `I'm sorry!`,
-            confirmButtonText: 'Will do!',
-            html: `This is Luiz's fault!<br><br>Could you try again using your first and last name?<br><br>If that doesn't help send an email to luiz at luizchagasjr@gmail.com, he'll help you!`
-          });
-        }
-
-        return swal({
-          title: `Are you coming?`,
-          confirmButtonText: 'Yes!',
-          showLoaderOnConfirm: true,
-          allowOutsideClick: false,
-          showCancelButton: true,
-          cancelButtonText: `I can't come.`,
-        }).then(result => {
-
-          if (result.dismiss == "cancel") {
-            $.ajax({
-              type: "POST",
-              url: '/api/confirm',
-              data: {
-                person: user.name,
-                amount: 0
-              },
-              dataType: 'JSON'
-            });
-
-            swal({
-              title: 'Bummer!',
-              html: `Thanks for letting us know!`
-            });
-            
-            throw "End of flow";
-          }
-
-          if (user.tickets > 1) {
-            return swal({
-              title: `How many people are coming?`,
-              input: 'number',
-              inputValue: 1,
-              confirmButtonText: 'Next',
-              showLoaderOnConfirm: true,
-              allowOutsideClick: false
-            });
-          } else {
-            return Promise.resolve({
-              value: 1
-            });
-          }
-        }).then(result => {
-
-          if (!result) {
-            return;
-          }
-
-          if (result.value > user.tickets) {
-            return swal({
-              type: 'error',
-              title: 'Mmmm!',
-              html: `Could you please verify the amount of guests and try to RSVP again?`
-            });
-          }
-
-          if (result.value > 0) {
-            return new Promise((resolve, reject) => {
-              $.ajax({
-                type: "POST",
-                url: '/api/confirm',
-                data: {
-                  person: user.name,
-                  amount: result.value
-                },
-                dataType: 'JSON'
-              }).then(function(data, textStatus, jqXHR) {
-                swal({
-                  type: 'success',
-                  title: 'Wahoo!',
-                  html: `Your reservation was confirmed. <br> We look forward to seeing you there!`
-                });
-              }, function(jqXHR, textStatus, errorThrown) {
-                swal({
-                  type: 'error',
-                  title: 'Oh no!',
-                  html: `Something went wrong! Please try again.`
-                });
-              });
-            });
-          } else {
-            swal({
-              title: 'Bummer!',
-              html: `Thanks for letting us know!`
-            });
-          }
-        }).catch(err => {
-
-        });
-      });
-    } else {
-      swal({
-        type: 'error',
-        title: 'Oops',
-        html: `I couldn't find your name on the list ${result.value}!`
-      });
-    }
+      type: 'error',
+      title: `I'm sorry!`,
+      confirmButtonText: 'Got it!',
+      html: `You can't RSVP at this time.`
   });
+  // swal({
+  //   title: `What's your name?`,
+  //   input: 'text',
+  //   showCancelButton: true,
+  //   confirmButtonText: 'Next',
+  //   showLoaderOnConfirm: true,
+  //   allowOutsideClick: false,
+  //   inputValidator: (value) => {
+  //     return !value && 'You need to write something!'
+  //   }
+  // }).then((result) => {
+  //   if (!result || !result.value) {
+  //     return;
+  //   }
+
+  //   const user = findRSVP(result.value);
+
+  //   if (user.tickets > 0) {
+  //     swal({
+  //       type: 'success',
+  //       title: 'Yay!',
+  //       html: `I've found your reservation ${user.name}! <br> You have up to ${user.tickets} tickets.`,
+  //       confirmButtonText: 'Next',
+  //       showCancelButton: true,
+  //       cancelButtonText: `That's not me`,
+  //       showLoaderOnConfirm: true,
+  //       allowOutsideClick: false
+  //     }).then((result) => {
+
+  //       if (result.dismiss == "cancel") {
+  //         return swal({
+  //           type: 'error',
+  //           title: `I'm sorry!`,
+  //           confirmButtonText: 'Will do!',
+  //           html: `This is Luiz's fault!<br><br>Could you try again using your first and last name?<br><br>If that doesn't help send an email to luiz at luizchagasjr@gmail.com, he'll help you!`
+  //         });
+  //       }
+
+  //       return swal({
+  //         title: `Are you coming?`,
+  //         confirmButtonText: 'Yes!',
+  //         showLoaderOnConfirm: true,
+  //         allowOutsideClick: false,
+  //         showCancelButton: true,
+  //         cancelButtonText: `I can't come.`,
+  //       }).then(result => {
+
+  //         if (result.dismiss == "cancel") {
+  //           $.ajax({
+  //             type: "POST",
+  //             url: '/api/confirm',
+  //             data: {
+  //               person: user.name,
+  //               amount: 0
+  //             },
+  //             dataType: 'JSON'
+  //           });
+
+  //           swal({
+  //             title: 'Bummer!',
+  //             html: `Thanks for letting us know!`
+  //           });
+            
+  //           throw "End of flow";
+  //         }
+
+  //         if (user.tickets > 1) {
+  //           return swal({
+  //             title: `How many people are coming?`,
+  //             input: 'number',
+  //             inputValue: 1,
+  //             confirmButtonText: 'Next',
+  //             showLoaderOnConfirm: true,
+  //             allowOutsideClick: false
+  //           });
+  //         } else {
+  //           return Promise.resolve({
+  //             value: 1
+  //           });
+  //         }
+  //       }).then(result => {
+
+  //         if (!result) {
+  //           return;
+  //         }
+
+  //         if (result.value > user.tickets) {
+  //           return swal({
+  //             type: 'error',
+  //             title: 'Mmmm!',
+  //             html: `Could you please verify the amount of guests and try to RSVP again?`
+  //           });
+  //         }
+
+  //         if (result.value > 0) {
+  //           return new Promise((resolve, reject) => {
+  //             $.ajax({
+  //               type: "POST",
+  //               url: '/api/confirm',
+  //               data: {
+  //                 person: user.name,
+  //                 amount: result.value
+  //               },
+  //               dataType: 'JSON'
+  //             }).then(function(data, textStatus, jqXHR) {
+  //               swal({
+  //                 type: 'success',
+  //                 title: 'Wahoo!',
+  //                 html: `Your reservation was confirmed. <br> We look forward to seeing you there!`
+  //               });
+  //             }, function(jqXHR, textStatus, errorThrown) {
+  //               swal({
+  //                 type: 'error',
+  //                 title: 'Oh no!',
+  //                 html: `Something went wrong! Please try again.`
+  //               });
+  //             });
+  //           });
+  //         } else {
+  //           swal({
+  //             title: 'Bummer!',
+  //             html: `Thanks for letting us know!`
+  //           });
+  //         }
+  //       }).catch(err => {
+
+  //       });
+  //     });
+  //   } else {
+  //     swal({
+  //       type: 'error',
+  //       title: 'Oops',
+  //       html: `I couldn't find your name on the list ${result.value}!`
+  //     });
+  //   }
+  // });
 }
 
 

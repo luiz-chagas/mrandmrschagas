@@ -664,8 +664,8 @@ input[type="text"].error, input[type="email"].error, textarea.error {
   font-size: 3rem;
   text-align: center;
   margin-top: 3rem;
-  border: 3px dashed red;
-  background: rgba(255, 0, 0, 0.3);
+  border-radius: 10px;
+  background: rgba(255, 0, 0, 0.5);
   transition: .3s;
 }
 
